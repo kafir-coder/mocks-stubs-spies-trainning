@@ -26,3 +26,7 @@ export function g_response<T>(status_code: number, body: T) {
     body: body
   }
 }
+
+export interface email_validator {
+  validate(email: string): boolean
+}
