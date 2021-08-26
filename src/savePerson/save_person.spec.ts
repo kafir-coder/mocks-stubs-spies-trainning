@@ -16,4 +16,20 @@ describe('save person usecase', () => {
     expect(response).toMatchObject(expect_stub)
   });
 
+  test('ensure that the controllers returns a 400 error if a required field is missing', () => {
+    const sut = make_sut();
+    //@ts-ignore
+    const u_person: u_person = {
+      name: 'Onodera Pumpum',
+      age: 12,
+      //password: '^iloveaiko$'
+    };
+    const expect_stub = {
+      status: 400,
+      body: new Error('there are missing fields')
+    };
+    const response = sut.handle(u_person) 
+    expect(response).toMatchObject(expect_stub);
+  });
+  
 });
