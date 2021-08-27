@@ -53,4 +53,17 @@ describe('save person usecase', () => {
     expect(validator_spy).toHaveBeenCalledWith(u_person['email']);
     expect(validator_spy).toHaveBeenCalledTimes(1)
   })
+
+  test('ensure that save_person controller returns a error if emails is not valid', () => {
+    const { sut, validator_stub } = make_sut();
+    const u_person: u_person = {
+      name: 'Onodera Pumpum',
+      age: 12,
+      password: '^iloveaiko$',
+      email: 'onodera@pumpu.com'
+    };
+    jest.spyOn(validator_stub, 'validate').mockReturnValueOnce(false)
+    const reponse = sut.handle(u_person);
+    expect(reponse).toEqual(g_response<Error>(400, new Error('email is not valid')))
+  })
 });
