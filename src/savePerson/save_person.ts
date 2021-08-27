@@ -18,6 +18,9 @@ export class savePerson implements usecase{
     }
 
     const is_email_validated = this.email_validator.validate(person_data['email']);
+    if (!is_email_validated) {
+      return g_response<Error>(400, new Error('email is not valid'));
+    }
     return g_response<s_person>(200, {
       id: '12345',
       name: 'Onodera Pumpum',
