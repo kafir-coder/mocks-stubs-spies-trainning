@@ -1,7 +1,8 @@
 export type u_person = {
   name: string,
   age: number,
-  password: string
+  password: string,
+  email: string
 }
 
 export type response = {
