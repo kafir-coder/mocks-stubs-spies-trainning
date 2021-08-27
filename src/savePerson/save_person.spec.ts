@@ -1,6 +1,6 @@
 import { email_validator, g_response, u_person } from './protocols';
 import { savePerson } from './save_person'
-
+import { email_validator_stub } from './__mocks__/email_validator'
 describe('save person usecase', () => {
 
   const make_sut = () => {
@@ -39,4 +39,18 @@ describe('save person usecase', () => {
     const response = sut.handle(u_person) 
     expect(response).toMatchObject(expect_stub);
   });
+
+  test('ensure that email is validated', () => {
+    const {sut, validator_stub} = make_sut();
+    const u_person: u_person = {
+      name: 'Onodera Pumpum',
+      age: 12,
+      password: '^iloveaiko$',
+      email: 'onodera@pumpu.com'
+    };
+    const validator_spy = jest.spyOn(validator_stub, 'validate');
+    sut.handle(u_person);
+    expect(validator_spy).toHaveBeenCalledWith(u_person['email']);
+    expect(validator_spy).toHaveBeenCalledTimes(1)
+  })
 });
