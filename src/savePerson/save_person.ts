@@ -17,6 +17,7 @@ export class savePerson implements usecase{
       }
     }
 
+    const is_email_validated = this.email_validator.validate(person_data['email']);
     return g_response<s_person>(200, {
       id: '12345',
       name: 'Onodera Pumpum',
