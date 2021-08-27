@@ -1,6 +1,9 @@
-import { g_response, response, s_person, usecase, u_person } from './protocols'
+import { email_validator, g_response, response, s_person, usecase, u_person } from './protocols'
 import * as R from 'ramda';
 export class savePerson implements usecase{
+  constructor (
+    private readonly email_validator: email_validator
+  ) {}
   handle(person_data: u_person): response {
 
     const required_fields = ['name', 'age', 'password'];
