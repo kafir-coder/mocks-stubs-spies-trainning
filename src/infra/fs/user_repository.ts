@@ -6,6 +6,7 @@ export class user_repository implements fs_persists_user_repository, fs_load_use
     await writeFile(person_data['email']+person_data['age'], JSON.stringify(person_data));     
   }
   async loadById(id: string) {
-    await readFile(id)
+    const person = await readFile(id)
+    return JSON.parse(person.toString())
   }
 }
