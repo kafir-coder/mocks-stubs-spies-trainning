@@ -15,7 +15,7 @@ describe('fs persists user data layer', () => {
     //@ts-ignore
     const person_data: u_person = {}
     const result = sut.add(person_data)
-    expect(result).rejects.toThrow()
+    expect(result).rejects.toBe('person data is empty')
   });
 
   test('ensures user_repository.save is called from data layer', async () => {
