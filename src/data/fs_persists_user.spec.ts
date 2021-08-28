@@ -2,8 +2,12 @@ import { u_person } from '../savePerson/protocols';
 import { fs_persists_user } from './fs_persists_user';
 describe('fs persists user data layer', () => {
   const make_sut = () => {
-    const fs_persists = new fs_persists_user();
-    return fs_persists;
+    const user_repository = new user_repository()
+    const fs_persists = new fs_persists_user(user_repository);
+    return {
+      user_repository,
+      fs_persists
+    };
   }
   test('ensures person_data isn\'t empty', async () => {
     const sut = make_sut();
