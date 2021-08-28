@@ -35,4 +35,18 @@ describe('user repository', () => {
     expect(readFile_spy).toHaveBeenCalledTimes(1);
     expect(readFile_spy).toHaveBeenCalledWith(id)
   })
+
+  test('ensure user_repository.loadById returns a s_person object', async () => {
+    const sut = make_sut();
+    const person_data = {
+      id: 'mogli@keit.com19',
+      name: 'Tony Jelinek von Kyanda',
+      age: 19,
+      password: '^IloveAiko$',
+      email: 'mogli@keit.com'
+    }
+    const id = 'mogli@keit.com19';
+    const result = await sut.loadById(id)
+    expect(result).toEqual(person_data)
+  })
 });
